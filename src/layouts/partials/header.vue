@@ -16,10 +16,10 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <a href="#messages" data-toggle="tab" aria-expanded="false" class="nav-link"
-                           :class="{ active : $store.state.switcher == 'network' }">
-                            Cộng đồng
-                        </a>
+                        <router-link to="/dashboard" data-toggle="tab" aria-expanded="false" class="nav-link"
+                           :class="{ active : $store.state.switcher == 'dashboard' || $route.path =='/dashboard'  }">
+                            Tài khoản
+                        </router-link>
                     </li>
 
                 </ul>
@@ -31,6 +31,10 @@
                     <div id="navigation" class="active">
                         <header-job v-if="$store.state.switcher == '/' || $route.path =='/' " />
                         <header-event v-if="$store.state.switcher == '/blogs' || $route.path =='/blogs'" />
+                        <template v-if="$store.state.switcher == 'dashboard' || $route.path =='/dashboard'">
+                            <header-employer  />
+                        </template>
+
                     </div>
                 </div>
             </div>
@@ -40,10 +44,12 @@
 <script>
     import HeaderJob from '@/layouts/partials/header-job'
     import HeaderEvent from '@/layouts/partials/header-event'
+    import HeaderEmployer from '@/layouts/partials/header-employer'
     export default{
         components: {
             HeaderJob,
-            HeaderEvent
+            HeaderEvent,
+            HeaderEmployer
         },
         created(){
             console.log( this.$store )
